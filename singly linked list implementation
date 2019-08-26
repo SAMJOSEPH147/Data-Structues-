@@ -12,7 +12,7 @@ struct node
   int data;
   struct node* link;
 };
-struct node* root;
+struct node* root = NULL;
 int main()
 {
     int ch,l,ia;
