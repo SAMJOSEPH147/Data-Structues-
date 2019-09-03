@@ -1,0 +1,83 @@
+//STATIC QUEUE IMPLEMENTATION
+#include<stdio.h>
+#include<stdlib.h>
+int queue[5];
+int front = 0;
+int rear = 0;
+void enqueue(void);
+int dequeue(void);
+void display(void);
+int main()
+{
+    int ch,a;
+    while(1)
+    {
+        printf("\n1.Enqueue\n");
+        printf("2.Dequeue\n");
+        printf("3.Display\n");
+        printf("4.Exit\n");
+        printf("Enter your choice\n");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+        case 1:
+            enqueue();
+            break;
+        case 2:
+            a = dequeue();
+            if(a==0)
+                printf("Queue is empty\n");
+            else
+                printf("Dequeued element : %d\n",a);
+            break;
+        case 3:
+            display();
+            break;
+        case 4:
+            exit(0);
+            break;
+        default:
+            printf("Enter a valid choice\n");
+            break;
+        }
+    }
+}
+void enqueue()
+{
+    int n;
+    if(rear==5)
+        printf("Queue is Full\n");
+    else
+    {
+        printf("Enter the element to be enqueued\n");
+        scanf("%d",&n);
+        queue[rear] = n;
+        rear++;
+        printf("Enqueue successful\n");
+    }
+}
+int dequeue()
+{
+    int dq,i;
+    if(front == rear)
+        return 0;
+    else
+    {
+        dq = queue[front];
+        for(i=0;i<rear-1;i++)
+            queue[i] = queue[i+1];
+        rear--;
+        return dq;
+    }
+}
+void display()
+{
+    int i;
+    if(front == rear)
+        printf("Queue is Empty\n");
+    else
+    {
+        for(i=front;i<rear;i++)
+            printf("%d ",queue[i]);
+    }
+}
