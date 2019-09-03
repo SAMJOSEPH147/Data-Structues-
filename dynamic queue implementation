@@ -1,0 +1,95 @@
+// DYNAMIC QUEUE IMPLEMEMNTATION
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node* link;
+};
+struct node* root = NULL;
+void enqueue(void);
+int dequeue(void);
+void display(void);
+int main()
+{
+    int ch,a;
+    while(1)
+    {
+        printf("\n1.Enqueue\n");
+        printf("2.Dequeue\n");
+        printf("3.Display\n");
+        printf("4.Exit\n");
+        printf("Enter your choice\n");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+        case 1:
+            enqueue();
+            break;
+        case 2:
+            a = dequeue();
+            if(a==0)
+                printf("Queue is Empty\n");
+            else
+                printf("Dequeued element : %d",a);
+            break;
+        case 3:
+            display();
+            break;
+        case 4:
+            exit(0);
+            break;
+        }
+    }
+    return 0;
+}
+void enqueue()
+{
+    struct node* temp;
+    temp = (struct node*)malloc(sizeof(struct node));
+    printf("Enter the element to be enqueued\n");
+    scanf("%d",&temp->data);
+    temp->link = NULL;
+    if(root == NULL)
+        root = temp;
+    else
+    {
+        struct node* p;
+        p = root;
+        while(p->link != NULL)
+            p = p->link;
+        p->link = temp;
+    }
+    printf("Enqueue successful\n");
+}
+int dequeue()
+{
+    int dq;
+    if(root == NULL)
+        return 0;
+    else
+    {
+        struct node* temp;
+        temp = root;
+        dq = root->data;
+        root = temp->link;
+        temp->link = NULL;
+        free(temp);
+        return dq;
+    }
+}
+void display()
+{
+    struct node* p;
+    p = root;
+    if(root == NULL)
+        printf("Queue is Empty\n");
+    else
+    {
+        while(p != NULL)
+        {
+            printf("%d ",p->data);
+            p = p->link;
+        }
+    }
+}
